@@ -1,44 +1,33 @@
 class Solution {
     public int[][] merge(int[][] intervals) {
-        if (intervals.length == 0) {
-            return new int[][]{};
+        
+        int[] start = new int[intervals.length];
+        int[] end = new int[intervals.length];
+        for(int i = 0;i<intervals.length;i++){
+            start[i] = intervals[i][0];
+            end[i] =   intervals[i][1];
         }
-
-        PriorityQueue<int[]> heap = new PriorityQueue<>((o1, o2) -> {
-            if (o1[0] == o2[0]) {
-                return Integer.compare(o1[1], o2[1]);
+        Arrays.sort(start);
+        Arrays.sort(end);
+        List<int[]> res = new ArrayList<>();
+        int[] prev = {start[0],end[0]};
+        res.add(prev);
+        for(int i = 0;i<start.length;i++){
+            if(start[i] <= prev[1]){
+                prev[1] = Math.max(prev[1],end[i]);
             }
-
-            return Integer.compare(o1[0], o2[0]);
-        });
-
-        for (int[] interval : intervals) {
-            heap.add(interval);
-        }
-
-        int[] toBeMerged = heap.poll();
-        List<int[]> mergedIntervals = new ArrayList<>();
-
-        while (!heap.isEmpty()) {
-            int[] currInterval = heap.poll();
-
-            if (toBeMerged[1] >= currInterval[0]) {
-                toBeMerged[0] = Math.min(toBeMerged[0], currInterval[0]);
-                toBeMerged[1] = Math.max(toBeMerged[1], currInterval[1]);
-            } else {
-                mergedIntervals.add(toBeMerged);
-                toBeMerged = currInterval;
+            else{
+               prev = new int[]{start[i],end[i]};
+                res.add(prev);
             }
         }
-
-        mergedIntervals.add(toBeMerged);
-
-        int[][] result = new int[mergedIntervals.size()][2];
-
-        for (int i = 0; i < result.length; i++) {
-            result[i] = mergedIntervals.get(i);
+        int[][] ans = new int[res.size()][2];
+        for(int i = 0;i<ans.length;i++){
+            int[] x = res.get(i);
+            ans[i][0] = x[0];
+            ans[i][1] = x[1];
         }
-
-        return result;
+        return ans;
     }
+
 }
