@@ -127,6 +127,7 @@ class Node
     }
 }*/
 
+
 class Solution{
     //Function to return list containing elements of right view of binary tree.
     ArrayList<Integer> rightView(Node node) {
