@@ -15,7 +15,6 @@ class Solution:
                 cnt+=1
         return mxglobal+cnt
 
-
 #{ 
  # Driver Code Starts
 #Initial Template for Python 3
