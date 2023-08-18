@@ -7,6 +7,7 @@ class Solution:
                 res.appendleft(A[i])
         return res
 
+
 #{ 
  # Driver Code Starts
 #Initial Template for Python 3
