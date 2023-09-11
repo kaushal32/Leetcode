@@ -10,6 +10,7 @@ class Solution:
             k+=1;
         return True
 
+
 #{ 
  # Driver Code Starts
 #Initial Template for Python 3
